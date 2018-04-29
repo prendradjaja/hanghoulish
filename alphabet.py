@@ -26,6 +26,10 @@ abc = {  # ptodo-rename
   'y': 'ㅟ',
   'z': 'ㅆ',
 
+  # placeholders
+  'V': 'ㅡ',
+  'C': 'ㅇ',
+
   'ㅏ': 'a',
   'ㅂ': 'b',
   'ㅊ': 'c',
