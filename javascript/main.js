@@ -679,5 +679,8 @@ function tokenize(line) {
     return tokens;
 }
 
+
+// for browser ext: https://stackoverflow.com/questions/10730309/find-all-text-nodes-in-html-page
+
 // demo_words();
 demo_prose();
