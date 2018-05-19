@@ -488,6 +488,9 @@ function contains(seq, elem) {
 // . W and Y
 // . F, Q, and V
 // . triple-consonant clusters
+//
+// . illegal syllables like 'of' are simply elided by hangul.js
+// . any changes from hanghoulish-chrome
 
 // ptodo-bad results (these are the expected results)
 // . over = o ver
