@@ -523,6 +523,8 @@ const _test_words = [
 ]
 .concat('the quick brown fox jumps over the lazy dog'.split(' '));
 
+const test_prose = "The quick, clever, brown fox can't sleep.\nA-B testing is useful.";
+
 // uniq
 const test_words = [];
 _test_words.forEach(w => {
@@ -599,7 +601,7 @@ function encode(word) {
         let new_segs = segments(word).map(x => encode_segment(x, word));
         return new_segs.join('');
     } catch (e) {
-        return '???';
+        return word;
     }
 }
 
@@ -635,11 +637,28 @@ function add_placeholders(seg) {
     }
 }
 
-function main() {
+function demo_words() {
     const maxlen = Math.max.apply(null, test_words.map(x => x.length));
     test_words.forEach(w => {
         console.log(w + '\t:', encode(w))
     });
 }
 
-main();
+function demo_prose() {
+    const test_lines = test_prose.toLowerCase().split('\n');
+    test_lines.forEach(line => {
+        let sanitized = '';
+        for (let c of line.split('')) {
+            if (contains(ascii_lowercase, c) || c === ' ') {
+                sanitized += c;
+            } else {
+                sanitized += ` ${c} `;
+            }
+        }
+        const words = sanitized.split(' ').filter(x => x !== '');
+        console.log(words.map(w => encode(w)).join(' '));
+    });
+}
+
+// demo_words();
+demo_prose();
