@@ -645,19 +645,35 @@ function demo_words() {
 }
 
 function demo_prose() {
-    const test_lines = test_prose.toLowerCase().split('\n');
-    test_lines.forEach(line => {
-        let sanitized = '';
-        for (let c of line.split('')) {
-            if (contains(ascii_lowercase, c) || c === ' ') {
-                sanitized += c;
+    console.log(encode_text(test_prose));
+}
+
+function encode_text(text) {
+    const tokens = tokenize(text.toLowerCase());
+    return tokens.map(w => encode(w)).join('');
+}
+
+function tokenize(line) {
+    let curr_token = '';
+    let is_alpha_token;
+    let tokens = [];
+    line.split('').forEach(c => {
+        const is_alpha_char = contains(ascii_lowercase, c);
+        if (curr_token === '') {
+            is_alpha_token = is_alpha_char;
+            curr_token += c;
+        } else {
+            if (is_alpha_token === is_alpha_char) {
+                curr_token += c;
             } else {
-                sanitized += ` ${c} `;
+                tokens.push(curr_token);
+                curr_token = c;
+                is_alpha_token = is_alpha_char;
             }
         }
-        const words = sanitized.split(' ').filter(x => x !== '');
-        console.log(words.map(w => encode(w)).join(' '));
     });
+    tokens.push(curr_token);
+    return tokens;
 }
 
 // demo_words();
