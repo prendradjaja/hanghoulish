@@ -485,14 +485,10 @@ function contains(seq, elem) {
 
 
 // ptodo
-// . W and Y
-// . F, Q, and V
-// . triple-consonant clusters
-//
-// . illegal syllables like 'of' are simply elided by hangul.js
-// . any changes from hanghoulish-chrome
+// . all the 'aesthetic' stuff from the OP's rules
+// . include extension-specific stuff
 
-// ptodo-bad results (these are the expected results)
+// ptodo: specific bad results (and their expected results)
 // . over = o ver
 // . takes = tak es OR ta kes? not sure
 // . iterable = i te rab le?
@@ -526,7 +522,7 @@ const _test_words = [
 ]
 .concat('the quick brown fox jumps over the lazy dog'.split(' '));
 
-const test_prose = "of you bats whatever";
+const test_prose = "xeno";
 
 const EXTRA_SPACING = '';
 // const EXTRA_SPACING = '\u00A0';
