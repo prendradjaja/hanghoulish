@@ -652,17 +652,6 @@ function add_placeholders(seg) {
     }
 }
 
-function demo_words() {
-    const maxlen = Math.max.apply(null, test_words.map(x => x.length));
-    test_words.forEach(w => {
-        console.log(w + '\t:', encode(w))
-    });
-}
-
-function demo_prose() {
-    console.log(encode_text(test_prose));
-}
-
 function encode_text(text) {
     const tokens = tokenize(text.toLowerCase());
     return tokens.map(w => encode(w)).join('');
@@ -691,8 +680,43 @@ function tokenize(line) {
     return tokens;
 }
 
+function demo_words() {
+    const maxlen = Math.max.apply(null, test_words.map(x => x.length));
+    test_words.forEach(w => {
+        console.log(w + '\t:', encode(w))
+    });
+}
 
-// for browser ext: https://stackoverflow.com/questions/10730309/find-all-text-nodes-in-html-page
+function demo_prose() {
+    console.log(encode_text(test_prose));
+}
+
+function textNodesUnder(el){
+  var n, a=[], walk=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null,false);
+  while(n=walk.nextNode()) a.push(n);
+  return a;
+}
+
+function main() {
+  const trigger = [71, 72, 222];  // gh'
+  const keypresses = trigger.map(x => 0);
+  document.body.onkeydown = (evt) => {
+    keypresses.push(evt.keyCode);
+    keypresses.shift();
+    if (''+keypresses == ''+trigger) {
+      encode_all();
+    }
+  };
+}
+
+// https://stackoverflow.com/questions/10730309/find-all-text-nodes-in-html-page
+function encode_all() {
+  textNodesUnder(document.body).forEach(n => {
+    n.textContent = encode_text(n.textContent);
+  });
+}
+
 
 // demo_words();
-demo_prose();
+// demo_prose();
+// main();
