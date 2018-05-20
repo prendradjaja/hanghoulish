@@ -526,7 +526,10 @@ const _test_words = [
 ]
 .concat('the quick brown fox jumps over the lazy dog'.split(' '));
 
-const test_prose = "The quick, clever, brown fox can't sleep.\nA-B testing is useful.";
+const test_prose = "of you bats";
+
+const EXTRA_SPACING = '';
+// const EXTRA_SPACING = '\u00A0';
 
 // uniq
 const test_words = [];
@@ -604,7 +607,7 @@ function encode(word) {
         let new_segs = segments(word).map(x => encode_segment(x, word));
         return new_segs.join('');
     } catch (e) {
-        return word;
+        return word + EXTRA_SPACING;
     }
 }
 
@@ -613,7 +616,11 @@ function encode_segment(orig_seg, word) {
     const jamos = seg.split('').map(letter => abc[letter]);
     try {
         const res = hangul.compose.apply(null, jamos);
-        return res;
+        if (res) {
+            return res;
+        } else {
+            return orig_seg;
+        }
     } catch (e) {
         console.log('Word              :', word);
         console.log('Segment           :', orig_seg);
