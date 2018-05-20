@@ -526,7 +526,7 @@ const _test_words = [
 ]
 .concat('the quick brown fox jumps over the lazy dog'.split(' '));
 
-const test_prose = "of you bats";
+const test_prose = "of you bats whatever";
 
 const EXTRA_SPACING = '';
 // const EXTRA_SPACING = '\u00A0';
@@ -553,7 +553,7 @@ function to_bucket(letter) {
     if (ascii_lowercase.indexOf(letter) === -1) {
         throw 'AssertionError';
     }
-    if ('aeiou'.indexOf(letter) !== -1) {
+    if ('aeiouwy'.indexOf(letter) !== -1) {
         return 'v';
     } else {
         return 'c';
@@ -563,9 +563,9 @@ function to_bucket(letter) {
 
 
 function segments(word) {
-    if (contains(word, 'w') || contains(word, 'y')) {
-        throw 'NotImplemented';
-    }
+    // if (contains(word, 'w') || contains(word, 'y')) {
+    //     throw 'NotImplemented';
+    // }
     const bucketed = to_buckets(word);
 
     const ret = [];
