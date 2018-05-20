@@ -595,9 +595,17 @@ function segments(word) {
             throw 'ptodo bug?';
         }
 
-        const to_join = word.substring(i, i+use);
-        ret.push(to_join);
-        i += use;
+        const seg = word.substring(i, i+use);
+        const last_char = seg.charAt(seg.length - 1);
+
+        if (! contains('fqv', last_char) || seg.length === 1) {
+            ret.push(seg);
+            i += use;
+        } else {
+            const shorter_seg = seg.substring(0, seg.length - 1);
+            ret.push(shorter_seg);
+            i += use - 1;
+        }
     }
     return ret;
 }
