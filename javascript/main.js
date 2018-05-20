@@ -486,6 +486,7 @@ function contains(seq, elem) {
 
 // ptodo
 // . all the 'aesthetic' stuff from the OP's rules
+// . X-disambiguation rule
 // . include extension-specific stuff
 
 // ptodo: specific bad results (and their expected results)
@@ -522,7 +523,7 @@ const _test_words = [
 ]
 .concat('the quick brown fox jumps over the lazy dog'.split(' '));
 
-const test_prose = "xeno";
+const test_prose = "Hello, world!";
 
 const EXTRA_SPACING = '';
 // const EXTRA_SPACING = '\u00A0';
